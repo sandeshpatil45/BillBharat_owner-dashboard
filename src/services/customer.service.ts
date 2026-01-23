@@ -3,6 +3,44 @@ import type { Customer, CustomerFilters, PaginatedResponse, ApiResponse } from '
 import { API_ENDPOINTS } from '../utils/constants';
 
 export const customerService = {
+  // Get current business (customer profile)
+  getCurrentBusiness: async (): Promise<Customer> => {
+    try {
+      const response = await api.get<ApiResponse<Customer>>(
+        API_ENDPOINTS.BUSINESS.CURRENT
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch business details');
+    }
+  },
+
+  // Setup new business profile
+  setupBusiness: async (businessData: any): Promise<Customer> => {
+    try {
+      const response = await api.post<ApiResponse<Customer>>(
+        API_ENDPOINTS.BUSINESS.SETUP,
+        businessData
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to setup business profile');
+    }
+  },
+
+  // Update business profile
+  updateBusiness: async (businessData: any): Promise<Customer> => {
+    try {
+      const response = await api.put<ApiResponse<Customer>>(
+        API_ENDPOINTS.BUSINESS.UPDATE,
+        businessData
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to update business profile');
+    }
+  },
+
   // Get all customers with filters and pagination
   getCustomers: async (
     filters?: CustomerFilters,

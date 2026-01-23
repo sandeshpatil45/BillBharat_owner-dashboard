@@ -10,6 +10,69 @@ import type {
 import { API_ENDPOINTS } from '../utils/constants';
 
 export const reportService = {
+  // Get today's sales summary
+  getTodaySales: async (): Promise<any> => {
+    try {
+      const response = await api.get<ApiResponse<any>>(
+        API_ENDPOINTS.REPORTS.TODAY_SALES
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch today sales');
+    }
+  },
+
+  // Get monthly sales summary
+  getMonthlySales: async (): Promise<any> => {
+    try {
+      const response = await api.get<ApiResponse<any>>(
+        API_ENDPOINTS.REPORTS.MONTHLY_SALES
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch monthly sales');
+    }
+  },
+
+  // Get sales for selected period
+  getSalesByDateRange: async (startDate: string, endDate: string): Promise<any> => {
+    try {
+      const response = await api.get<ApiResponse<any>>(
+        API_ENDPOINTS.REPORTS.SALES,
+        { params: { startDate, endDate } }
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch sales for date range');
+    }
+  },
+
+  // Get staff performance (restaurant only)
+  getStaffPerformance: async (filters?: any): Promise<any[]> => {
+    try {
+      const response = await api.get<ApiResponse<any[]>>(
+        API_ENDPOINTS.REPORTS.STAFF_PERFORMANCE,
+        { params: filters }
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch staff performance');
+    }
+  },
+
+  // Get sales report with filters
+  getSalesReport: async (filters?: any): Promise<any> => {
+    try {
+      const response = await api.get<ApiResponse<any>>(
+        API_ENDPOINTS.REPORTS.SALES_REPORT,
+        { params: filters }
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch sales report');
+    }
+  },
+
   // Get dashboard KPIs
   getDashboardKPIs: async (): Promise<DashboardKPIs> => {
     try {

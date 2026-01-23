@@ -1,7 +1,8 @@
 import { UserRole } from '../types';
 
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+// Base URL should NOT include /api suffix - it's added in endpoint constants below
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
 
 // App Configuration
 export const APP_TITLE = import.meta.env.VITE_APP_TITLE || 'BillBharat Owner Dashboard';
@@ -57,32 +58,78 @@ export const ROUTES = {
 // API Endpoints
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/auth/login',
-    LOGOUT: '/auth/logout',
-    REFRESH: '/auth/refresh',
-    CHANGE_PASSWORD: '/auth/change-password',
+    SEND_OTP: '/api/auth/send-otp',
+    VERIFY_OTP: '/api/auth/verify-otp',
+    RESEND_OTP: '/api/auth/resend-otp',
+    REGISTER: '/api/auth/register',
+    LOGIN: '/api/auth/login',
+    LOGOUT: '/api/auth/logout',
+    REFRESH: '/api/auth/refresh',
+    CHANGE_PASSWORD: '/api/auth/change-password',
+  },
+  BUSINESS: {
+    CURRENT: '/api/business/current',
+    SETUP: '/api/business/setup',
+    UPDATE: '/api/business/update',
   },
   CUSTOMERS: {
-    LIST: '/customers',
-    DETAIL: (id: string) => `/customers/${id}`,
-    EXPORT: '/customers/export',
+    LIST: '/api/business/current',
+    DETAIL: (id: string) => `/api/business/${id}`,
+    EXPORT: '/api/business/export',
   },
   SUBSCRIPTIONS: {
-    LIST: '/subscriptions',
-    DETAIL: (id: string) => `/subscriptions/${id}`,
-    EXPORT: '/subscriptions/export',
+    CURRENT: '/api/subscriptions/current',
+    START_TRIAL: '/api/subscriptions/start-trial',
+    CREATE: '/api/subscriptions/create',
+    UPGRADE: '/api/subscriptions/upgrade',
+    BILLING_HISTORY: '/api/subscriptions/billing-history',
+    LIST: '/api/subscriptions',
+    DETAIL: (id: string) => `/api/subscriptions/${id}`,
+    EXPORT: '/api/subscriptions/export',
+  },
+  PLANS: {
+    LIST: '/api/plans',
+    DETAIL: (id: string) => `/api/plans/${id}`,
+  },
+  PAYMENTS: {
+    CREATE_ORDER: '/api/payments/create-order',
+    VERIFY: '/api/payments/verify',
+  },
+  BILLS: {
+    LIST: '/api/bills',
+    DETAIL: (id: string) => `/api/bills/${id}`,
+    BY_NUMBER: (billNumber: string) => `/api/bills/number/${billNumber}`,
+    DATE_RANGE: '/api/bills/date-range',
+  },
+  INVOICES: {
+    LIST: '/api/invoices',
+    DETAIL: (id: string) => `/api/invoices/${id}`,
+    DATE_RANGE: '/api/invoices/date-range',
   },
   SALES: {
-    PERFORMANCE: '/sales/performance',
-    EXPORT: '/sales/export',
+    PERFORMANCE: '/api/bills',
+    EXPORT: '/api/bills/export',
+  },
+  ITEMS: {
+    LIST: '/api/items',
+    LOW_STOCK: '/api/items/low-stock',
+    FAST_MOVING: '/api/items/fast-items',
   },
   HARDWARE: {
-    LIST: '/hardware',
+    LIST: '/api/hardware',
   },
   REPORTS: {
-    DASHBOARD_KPIS: '/reports/dashboard-kpis',
-    REVENUE: '/reports/revenue',
-    PLAN_DISTRIBUTION: '/reports/plan-distribution',
-    CUSTOMER_GROWTH: '/reports/customer-growth',
+    TODAY_SALES: '/api/reports/today-sales',
+    MONTHLY_SALES: '/api/reports/monthly-sales',
+    SALES: '/api/reports/sales',
+    STAFF_PERFORMANCE: '/restaurant/reports/staff',
+    SALES_REPORT: '/restaurant/reports/sales',
+    DASHBOARD_KPIS: '/api/reports/dashboard-kpis',
+    REVENUE: '/api/reports/revenue',
+    PLAN_DISTRIBUTION: '/api/reports/plan-distribution',
+    CUSTOMER_GROWTH: '/api/reports/customer-growth',
+  },
+  USER: {
+    ELIGIBILITY: '/api/user/eligibility',
   },
 };

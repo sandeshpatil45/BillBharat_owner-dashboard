@@ -3,6 +3,63 @@ import type { LoginCredentials, User, ApiResponse } from '../types';
 import { API_ENDPOINTS, TOKEN_KEY, USER_KEY } from '../utils/constants';
 
 export const authService = {
+  // Send OTP for login
+  sendOTP: async (phoneNumber: string): Promise<void> => {
+    try {
+      await api.post<ApiResponse<void>>(API_ENDPOINTS.AUTH.SEND_OTP, { phoneNumber });
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to send OTP');
+    }
+  },
+
+  // Verify OTP code
+  verifyOTP: async (phoneNumber: string, otp: string): Promise<User> => {
+    try {
+      const response = await api.post<ApiResponse<User>>(API_ENDPOINTS.AUTH.VERIFY_OTP, {
+        phoneNumber,
+        otp,
+      });
+      const user = response.data.data;
+      
+      // Store token and user in localStorage
+      if (user.token) {
+        localStorage.setItem(TOKEN_KEY, user.token);
+      }
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      
+      return user;
+    } catch (error: any) {
+      throw new Error(error.message || 'OTP verification failed');
+    }
+  },
+
+  // Resend OTP
+  resendOTP: async (phoneNumber: string): Promise<void> => {
+    try {
+      await api.post<ApiResponse<void>>(API_ENDPOINTS.AUTH.RESEND_OTP, { phoneNumber });
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to resend OTP');
+    }
+  },
+
+  // Register shop & owner
+  register: async (registrationData: any): Promise<User> => {
+    try {
+      const response = await api.post<ApiResponse<User>>(API_ENDPOINTS.AUTH.REGISTER, registrationData);
+      const user = response.data.data;
+      
+      // Store token and user in localStorage
+      if (user.token) {
+        localStorage.setItem(TOKEN_KEY, user.token);
+      }
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      
+      return user;
+    } catch (error: any) {
+      throw new Error(error.message || 'Registration failed');
+    }
+  },
+
   // Login
   login: async (credentials: LoginCredentials): Promise<User> => {
     try {
