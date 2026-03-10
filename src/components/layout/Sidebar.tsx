@@ -15,9 +15,16 @@ import {
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import DevicesIcon from '@mui/icons-material/Devices';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import GroupsIcon from '@mui/icons-material/Groups';
+import StoreIcon from '@mui/icons-material/Store';
+import PrintIcon from '@mui/icons-material/Print';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import MapIcon from '@mui/icons-material/Map';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { ROUTES } from '../../utils/constants';
@@ -35,9 +42,16 @@ const menuItems: MenuItem[] = [
   { title: 'Dashboard', path: ROUTES.DASHBOARD, icon: <DashboardIcon /> },
   { title: 'Customers', path: ROUTES.CUSTOMERS, icon: <PeopleIcon /> },
   { title: 'Subscriptions', path: ROUTES.SUBSCRIPTIONS, icon: <SubscriptionsIcon /> },
+  { title: 'Renewals', path: ROUTES.RENEWALS, icon: <AutorenewIcon /> },
   { title: 'Sales', path: ROUTES.SALES, icon: <TrendingUpIcon /> },
   { title: 'Hardware', path: ROUTES.HARDWARE, icon: <DevicesIcon /> },
   { title: 'Reports', path: ROUTES.REPORTS, icon: <AssessmentIcon /> },
+  { title: 'Finance', path: ROUTES.FINANCE, icon: <AccountBalanceWalletIcon /> },
+  { title: 'Sales Team', path: ROUTES.SALES_TEAM, icon: <GroupsIcon /> },
+  { title: 'Merchants', path: ROUTES.MERCHANTS, icon: <StoreIcon /> },
+  { title: 'Printers', path: ROUTES.PRINTERS, icon: <PrintIcon /> },
+  { title: 'Paper Rolls', path: ROUTES.PAPER_ROLLS, icon: <InventoryIcon /> },
+  { title: 'Belts', path: ROUTES.BELTS, icon: <MapIcon /> },
   { title: 'Settings', path: ROUTES.SETTINGS, icon: <SettingsIcon /> },
 ];
 

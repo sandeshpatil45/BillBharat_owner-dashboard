@@ -5,6 +5,12 @@ import type {
   ChartData, 
   RevenueReport, 
   PlanDistribution,
+  HomeDashboardData,
+  SalesTrendData,
+  DashboardAlert,
+  FinanceData,
+  SalesTeamData,
+  ExecutiveDetail,
   ApiResponse 
 } from '../types';
 import { API_ENDPOINTS } from '../utils/constants';
@@ -159,6 +165,81 @@ export const reportService = {
     } catch (error: any) {
       // Return empty array if endpoint doesn't exist
       return [];
+    }
+  },
+
+  // Get home dashboard data (command center KPIs)
+  getHomeDashboard: async (): Promise<HomeDashboardData> => {
+    try {
+      const response = await api.get<ApiResponse<HomeDashboardData>>(
+        API_ENDPOINTS.REPORTS.HOME_DASHBOARD
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch home dashboard data');
+    }
+  },
+
+  // Get sales trend data (machine sales + paper roll orders per day)
+  getSalesTrend: async (days: number = 30): Promise<SalesTrendData[]> => {
+    try {
+      const response = await api.get<ApiResponse<SalesTrendData[]>>(
+        API_ENDPOINTS.REPORTS.SALES_TREND,
+        { params: { days } }
+      );
+      return response.data.data;
+    } catch (error: any) {
+      return [];
+    }
+  },
+
+  // Get live dashboard alerts
+  getDashboardAlerts: async (): Promise<DashboardAlert[]> => {
+    try {
+      const response = await api.get<ApiResponse<DashboardAlert[]>>(
+        API_ENDPOINTS.REPORTS.DASHBOARD_ALERTS
+      );
+      return response.data.data;
+    } catch (error: any) {
+      return [];
+    }
+  },
+
+  // Get finance & revenue data with date filter
+  getFinanceData: async (startDate?: string, endDate?: string): Promise<FinanceData> => {
+    try {
+      const response = await api.get<ApiResponse<FinanceData>>(
+        API_ENDPOINTS.REPORTS.FINANCE,
+        { params: { startDate, endDate } }
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch finance data');
+    }
+  },
+
+  // Get sales team performance data
+  getSalesTeamData: async (period?: string, belt?: string): Promise<SalesTeamData> => {
+    try {
+      const response = await api.get<ApiResponse<SalesTeamData>>(
+        API_ENDPOINTS.REPORTS.SALES_TEAM,
+        { params: { period, belt } }
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch sales team data');
+    }
+  },
+
+  // Get executive detail by ID
+  getExecutiveDetail: async (execId: string): Promise<ExecutiveDetail> => {
+    try {
+      const response = await api.get<ApiResponse<ExecutiveDetail>>(
+        API_ENDPOINTS.REPORTS.EXECUTIVE_DETAIL(execId)
+      );
+      return response.data.data;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to fetch executive detail');
     }
   },
 };

@@ -9,9 +9,16 @@ import AccessDenied from './pages/AccessDenied';
 import Dashboard from './pages/Dashboard';
 import Customers from './pages/Customers';
 import Subscriptions from './pages/Subscriptions';
+import RenewalsSubscriptions from './pages/RenewalsSubscriptions';
 import Sales from './pages/Sales';
 import Hardware from './pages/Hardware';
 import Reports from './pages/Reports';
+import Finance from './pages/Finance';
+import SalesTeam from './pages/SalesTeam';
+import MerchantManagement from './pages/MerchantManagement';
+import PrinterDeviceManagement from './pages/PrinterDeviceManagement';
+import PaperRollManagement from './pages/PaperRollManagement';
+import BeltTerritoryView from './pages/BeltTerritoryView';
 import Settings from './pages/Settings';
 import { ROUTES } from './utils/constants';
 
@@ -77,6 +84,14 @@ const App: React.FC = () => {
                 }
               />
               <Route
+                path={ROUTES.RENEWALS}
+                element={
+                  <ProtectedRoute>
+                    <RenewalsSubscriptions />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path={ROUTES.SALES}
                 element={
                   <ProtectedRoute>
@@ -97,6 +112,54 @@ const App: React.FC = () => {
                 element={
                   <ProtectedRoute>
                     <Reports />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.FINANCE}
+                element={
+                  <ProtectedRoute>
+                    <Finance />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.SALES_TEAM}
+                element={
+                  <ProtectedRoute>
+                    <SalesTeam />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.MERCHANTS}
+                element={
+                  <ProtectedRoute>
+                    <MerchantManagement />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.PRINTERS}
+                element={
+                  <ProtectedRoute>
+                    <PrinterDeviceManagement />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.PAPER_ROLLS}
+                element={
+                  <ProtectedRoute>
+                    <PaperRollManagement />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.BELTS}
+                element={
+                  <ProtectedRoute>
+                    <BeltTerritoryView />
                   </ProtectedRoute>
                 }
               />

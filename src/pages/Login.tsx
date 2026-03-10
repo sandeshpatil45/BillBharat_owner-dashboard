@@ -66,6 +66,10 @@ const Login: React.FC = () => {
             </Typography>
           </Box>
 
+          <Alert severity="info" sx={{ mb: 3 }}>
+            <strong>Demo Mode:</strong> Backend not connected. Use any email and password to login.
+          </Alert>
+
           {error && (
             <Alert severity="error" sx={{ mb: 3 }}>
               {error}
